@@ -1,0 +1,72 @@
+/* 
+https://www.youtube.com/watch?v=LoziivfAAjE 
+
+nmp install eslint
+npm install node
+npm install cheerio (implementation of core jQuery)
+npm install request (lightweight http module to make requests)
+
+Open the terminal in the current folder and create a package.jason usring the
+command 'nmp init -y'
+*/
+
+// Bring in the needed dependencies.
+const request = require('request');
+const cheerio = require('cheerio');
+
+/*
+Make a request with the needed url. This takes a second parameter of a 
+function (therefore, an arrow is being used). The second parameter will
+contain and give three possible outputs. With the if-statement, you want to
+make sure that there are no errors. Remember statuscode 200 :P from analyse
+(succesfull http response). After typing 'console.log(html);' in the True
+section of the if statement, you can go to the terminal and type command
+'node WebScraper' (save the file first). If the statement is indeed true, the
+whole page in html will appear in the terminal.
+
+The True section will change (the console.log will be removed), because you
+want to run the html through a load method from cheerio (in a variable). By
+putting it in a varaible you can use it just as if you were using jQuery to
+select things from the dom. 
+*/
+request('https://www.ebay.com/b/PC-Laptops-Netbooks/177/bn_317584', (error, 
+response, html) => {
+    if(!error && response.statusCode == 200) {
+        const $ = cheerio.load(html);
+
+        /* PRACTISE 
+        console.log($);
+        const siteHeading = $('.x-header');
+        console.log(siteHeading.html());
+        console.log(siteHeading.text());
+        const output = siteHeading.find('class').text();
+        console.log(output);
+       const output = siteheading
+       .children()
+       .next()
+       .text();
+       */
+
+        
+        /* 
+        After searching for the right pieces of code in the html of the eBay
+        website, we call const $ with the name of the class in which all the
+        needed items / info is stored and the tag (div). You want to have all
+        the items, so .each(index, element) is used. The arrow (once more)
+        points (ba-dum-tss) out that a function is going to be used.
+
+        In the function, a variable called item is created and used to get
+        all the information of the items and show the text they contain. 
+        
+        A new file (called 'WebScraper2') will be created in order to 'get the
+        posts..' , loop through everything to get the needed information and
+        put everything into a csv file.
+        */
+       $('.s-item div').each((i, el) => {
+           const item = $(el).text();
+           
+
+           console.log(item);
+       });
+    }
+});

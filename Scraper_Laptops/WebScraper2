@@ -1,0 +1,77 @@
+/* 
+https://www.youtube.com/watch?v=LoziivfAAjE 
+
+The initial file is copied, because we want to use most of the same stuff.
+
+Use the fs module (comes with node) to convert all the data to a .csv file
+(and so you don't have to install anything, you just have to call it in).
+Create a variable (in this case called writeStream) to open up a stream to
+write. The variable is set to the fs module createWriteStream('filename that
+you want to use')
+*/
+
+const request = require('request');
+const cheerio = require('cheerio');
+const fs = require('fs');
+const writeStream = fs.createWriteStream('Laptops.csv');
+var id = 0;
+
+
+// Write Headers (with the use of backticks)
+writeStream.write(`Id, Title, Image, Price \n`);
+
+
+request('https://www.ebay.com/b/PC-Laptops-Netbooks/177/bn_317584', (error, 
+response, html) => {
+    if(!error && response.statusCode == 200) {
+        const $ = cheerio.load(html);
+
+            /*
+            Take a look at the dom element classes that you might need:
+            - s-item__wrapper clearfix
+                - s-item__image-section
+                    - s-item__image
+                - s-item__info clearfix
+                    - s-item__link
+                        - s-item__title
+                    - s-item__summary
+                    - s-item__reviews
+                    - s-item__details clearfix
+                        - s-item__detail s-item__detail--primary (first one)
+                            - s-item__price
+        
+            Per item, we want to have the image, title, price (and maybe a short
+            description whatsoever).
+
+            Grab the class that consistantly contains an item and use .each()
+            to loop through them.
+            */
+           $('.s-item div').each((index, el) => {
+               const title = $(el)
+                .find('.s-item__title')
+                .text()
+                // Use replace to get rid of all the shitty whitespaces.
+                .replace(/\s\s+/g, '');
+            
+               const image = $(el)
+                .find('.s-item__image-img')
+                .attr('data-src');
+
+               const price = $(el)
+                .find('.s-item__price')
+                .text();
+
+                if (image != undefined && (title != '' || price != '')){
+                    id = id + 1;
+                    // Replace 'console.log(id, title, image, price);'
+                    // Write row to .csv file
+                    // (you can use the syntax due to the backticks)
+                    writeStream.write(`${id},${title},${image},${price} \n`);
+                }
+               
+           });
+           // Visual check to see / know when the file is ready.
+           console.log('Finished AF');
+
+    }
+});

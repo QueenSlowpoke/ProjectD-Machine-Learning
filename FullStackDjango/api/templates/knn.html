@@ -1,0 +1,119 @@
+﻿{% extends 'algorithm.html' %}
+
+{% block content%}
+    <h2>Employee Data</h2>
+    <div class="row">
+        <div class="col-7">
+            <p>EmployeeId: {{currentUser.0.0}}</p>
+            <p>Name: {{currentUser.0.7}} {{currentUser.0.8}}</p>
+            <p>Position: {{currentUser.0.10}}</p>
+            <p>Have Order History: {{history}}</p>
+        </div>
+        <div class="col-5">
+        {% if history == False %}
+            <ol class="list-unstyled">
+                <a href="#Hist" data-toggle="collapse" aria-expanded="false" class="btn btn-secondary">No History?</a>
+                <ol class="collapse list-unstyled" id="Hist" type="1">
+                        <h5>
+                            From no history to product array for KNN
+                        </h5>
+                    <ol>
+                        <li>
+                            Check the user position.(developer, designer or office)
+                        </li>
+                        <li>
+                            Find other employees with the same position. 
+                        </li>
+                    <li>
+                        Pick 5 random products from their most recent orders and put it in the array.
+                        <ul>
+                            <li>
+                                Why ? To make sure that a new employee will get similar recomendation based on their position.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Use that product array for the algortihm
+                    </li>
+                    </ol>
+                </ol>
+            </ol>  
+        {% endif %}
+        </div>
+    </div>
+    <hr />    
+<ol class="list-unstyled">
+    <a href="#Info" data-toggle="collapse" aria-expanded="false" class="btn btn-secondary">How does it work?</a>
+    <ol class="collapse list-unstyled" id="Info" type="1">
+            <h3>
+                Steps needed to return a recommendation.
+            </h3>
+        <ol>
+        <li>
+            A matrix will be created:
+            <ul>
+                <li>
+                    x axis: User ID
+                </li>
+                <li>
+                    y axis: Product ID
+                </li>
+                <li>
+                    values in matrix: count of how often an emplyee have borrowed a specific product
+                </li>
+            </ul>
+        </li>
+        <li>
+            Every combination will be compared and put into another matrix to fit the knn model.
+        </li>
+        <li>
+            An Array containing 5 products based on the recent borrow history will be put trough the algorithm.
+        </li>
+        <li>
+            For each product in the array the algorithm will find the two closest item and add that to the recommendation list
+        </li>
+        <li>
+            The list with filled product id will be orderd by the distance.
+           <ul>
+                <li>
+                    Distance is the number of how close it is to the previous borrowe item.
+                </li>
+                <li>
+                    The closer to the 0 the more similiar it is to the previous borrowed product.
+                </li>
+            </ul>
+        </li>
+        <li>
+            Return the recommendation list and use a query to fetch those products.
+        </li>
+        </ol>
+    </ol>
+</ol>  
+    <h3 class="mb-2">Recommendation</h3>
+    
+<table class="table table-light table-hover">
+    <thead class="thead-dark ">
+      <tr>
+        <th>No.</th>
+        <th>Product Name</th>
+        <th>Distance</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+        {% for product in recommend %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{product.1}}</td>
+            <td> {{product.2}}</td>
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+  </table>
+
+    <div class="row">
+
+    </div>
+
+{% endblock %}

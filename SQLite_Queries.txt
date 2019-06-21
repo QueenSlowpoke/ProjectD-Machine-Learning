@@ -1,0 +1,63 @@
+QUERIES--------------------------------------------------------------------
+
+-- Lijst van alle producten
+
+SELECT * FROM api_product;
+
+
+-- Weergeven van de userID en de productID die diegene heeft geleend + de
+   totale hoeveelheid dat het betreffende product is uitgeleend.
+
+SELECT u.id, pl.product_id, SUM(pl.amount)
+FROM api_user AS u
+JOIN api_order AS o
+ON u.id = o.user_id
+JOIN api_productlist AS pl
+ON o.id = pl.order_id
+GROUP BY u.id, pl.product_id;
+
+
+-- Weergeven van dezelfde shit als vorige querie, maar dan voor één
+   bepaalde user (in dit geval user 1).
+
+SELECT u.id, pl.product_id, SUM(pl.amount)
+FROM api_user AS u
+JOIN api_order AS o
+ON u.id = o.user_id
+JOIN api_productlist AS pl
+ON o.id = pl.order_id
+WHERE u.id = 1
+GROUP BY u.id, pl.product_id;
+
+
+--Order history van één user (user 1). 
+
+SELECT user_id, id
+FROM api_order
+WHERE user_id = 1;
+
+
+-- Order history van één user (user 1) en de bijbehorende producten per 
+   order.
+
+SELECT o.user_id, o.id, pl.id
+FROM api_order AS o
+JOIN api_productlist AS pl
+ON o.id = pl.order_id
+WHERE user_id = 1;
+
+
+-- Order history van één user (user 1) en de hoeveelheid producten per
+   order.
+
+SELECT o.user_id, o.id, COUNT(pl.id)
+FROM api_order AS o
+JOIN api_productlist AS pl
+ON o.id = pl.order_id
+WHERE user_id = 1
+GROUP BY o.user_id, o.id;
+
+
+
+
+

@@ -1,0 +1,17 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "python",
+      "interpreter": "(default)",
+      "interpreterArguments": "",
+      "scriptArguments": "",
+      "nativeDebug": false,
+      "webBrowserUrl": "",
+      "project": "manage.py",
+      "name": "manage.py",
+      "args": ["runserver"]
+    }
+  ]
+}

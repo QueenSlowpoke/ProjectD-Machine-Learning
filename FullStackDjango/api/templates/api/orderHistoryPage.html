@@ -1,0 +1,75 @@
+﻿{% extends "api/shared.html" %}
+{% block content %}
+<head>
+   <link rel="stylesheet" href="/static/orderhistory.css">
+</head>
+    <body>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <br />
+                    <h1 class="text-center">Order History</h1>
+                    <h3 class="text-center">Hello, {{User.0.7}} {{User.0.8}} </h3>
+                </div>
+            </div>
+            <div class="container">
+                {% for item in OrderHistory %}
+                <div class="row">
+                    <div class="col-3 py-1">
+                        <div class="block">
+                            {% if item.6 == "Mobile" or item.6 == "Mouse"   %}
+                            <img class="img-left" src="{{item.3}}" style="float:left" width="150" height=150"/>
+                            {% else %}
+                            <img class="img-left" src="{{item.3}}" style="float:left" width="150" height=100"/>
+                            {% endif%}
+                        </div>
+
+                    </div>
+                    <div class="col-9 my-auto">
+                        Order Id: <strong>{{item.0}}</strong>
+                        <br />
+                        Amount: {{item.5}}
+                        <br />
+                        {{item.2}}
+                        <br/>
+                        <a href="/productDetail/{{item.4}}"><button class="btn btn-dark">More</button></a>
+                    </div>
+                    <div class="col-sm-12 py-1">
+                        <div style='border-bottom:2px solid #ccc;'></div>
+                    </div>
+                    
+
+
+
+                </div>
+                {% endfor %}
+            <div class="mx-auto pt-3">
+            {% if OrderHistory.has_other_pages %}
+              <ul class="pagination justify-content-center">
+                {% if OrderHistory.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ OrderHistory.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="disabled page-item"><a class="page-link" href="?page=">&laquo;</a></li>
+                {% endif %}
+                {% for i in OrderHistory.paginator.page_range %}
+                  {% if OrderHistory.number == i %}
+                    <li class="active page-item disabled"><a class="page-link" href="?page=">{{ i }}</a></li>
+                  {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if OrderHistory.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ OrderHistory.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="disabled page-item"><a class="page-link" href="?page=">&raquo;</a></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+            </div>
+            </div>
+        </div>
+
+            
+    </body>
+
+{% endblock %}

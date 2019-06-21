@@ -1,0 +1,12 @@
+﻿{% extends 'algorithm.html' %}
+{% block content%}
+    <h2>Recommendation</h2>
+    <div class="row">
+        <div class="col-12">
+            <h4>Top 10 most borrowed items</h4>
+            {% for product in products %}
+                <p>{{product.0}} :  {{product.1}}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,4 @@
+C:\Users\KimYiuLui\Desktop\ProjectML\FullStackDjango\obj\Debug\FullStackDjango.pyproj.CoreCompileInputs.cache
+C:\Users\Imre\Documents\GitHub\ProjectML\FullStackDjango\obj\Debug\FullStackDjango.pyproj.CoreCompileInputs.cache
+C:\Users\ginad\Documents\GitHub\ProjectD\FullStackDjango\obj\Debug\FullStackDjango.pyproj.CoreCompileInputs.cache
+C:\Users\ginad\Documents\GitHub\ProjectD_MachineLearning\ProjectD-Machine-Learning\FullStackDjango\obj\Debug\FullStackDjango.pyproj.CoreCompileInputs.cache

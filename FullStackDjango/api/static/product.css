@@ -1,0 +1,91 @@
+#main {
+    margin-top: 0;
+}
+
+.list-group-flush .list-group-item a {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    text-decoration: none;
+    color:black;
+}
+
+.sideBar{
+    border:solid;
+    border-color: lightgray;
+    border-radius: 5px;
+    position:relative;
+}
+
+.sideBar a, .sideBar a:visited {
+        width:100%;
+        text-align: left;
+        text-decoration: none;
+        color: black;
+        border: solid;
+        border-color: lightgray;
+    }
+
+.list-group-flush a .list-group-item {
+    text-decoration: none;
+    background-color: white;
+    color:black;
+}
+
+.list-group-flush a{
+    text-decoration:none;
+}
+
+.list-group-flush a:hover .list-group-item {
+    text-decoration: none !important;
+    color: white !important;
+    background-color: #09037D
+}
+
+.card {
+    border:none;
+}
+
+.list-group-flush .list-group-item{
+    border:solid;
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+.list-group-flush:last-child .list-group-item:last-child {
+    border: solid;
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+li{
+    text-decoration:none;
+}
+
+.nodec{
+    text-decoration-line:none;
+}
+
+.btn-dark {
+    background-color: #09037D;
+    border: none;
+    color: white;
+    font-weight: bolder;
+}
+
+    .btn-dark:hover, .btn-dark::selection, .btn-dark:active, .btn-dark:active:focus {
+        background-color: #1e19b7 !important;
+        color: white;
+        font-weight: bolder;
+        outline:none;
+    }
+
+.page-item a{
+    color:black;
+}
+
+    .page-item a:hover {
+        color: white;
+        background-color: #1e19b7;
+    }
+

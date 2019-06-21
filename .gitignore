@@ -1,0 +1,6 @@
+
+FullStackDjango/Pipfile
+FullStackDjango/Pipfile.lock
+*.pyc
+*.pyc
+.vs/FullStackDjango/v15/.suo
